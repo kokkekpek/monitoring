@@ -65,7 +65,12 @@ cd project/directory/
 docker run -it --rm --name script -v "$PWD":/usr/src/app -w /usr/src/app node:14.5-alpine node install
 ```
 
-### 4. Run
+### 4. Create external network
+```sh
+docker network create web
+```
+
+### 5. Run
 ```sh
 docker-compose up -d
 ```
