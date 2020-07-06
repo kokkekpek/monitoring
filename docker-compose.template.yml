@@ -21,3 +21,11 @@ services:
       - traefik.http.routers.api.entrypoints=http
 #{sed.comment.tls}      - traefik.http.routers.api.tls=true
 #{sed.comment.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
+    networks:
+      - web
+      - traefik
+networks:
+  web:
+    external: true
+  traefik:
+    external: false
