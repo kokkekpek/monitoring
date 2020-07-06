@@ -1,0 +1,148 @@
+# Config for v2.2
+# Official documentation
+# @see https://docs.traefik.io/v2.2/
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+# Enabling the docker provider
+# @see https://docs.traefik.io/v2.2/providers/docker/
+providers:
+  docker: {}
+
+# HTTPS redirection (80 to 443)
+# @see https://docs.traefik.io/v2.2/routing/entrypoints/
+entryPoints:
+  http:
+    address: :80
+#{sed.comment.tls}   http:
+#{sed.comment.tls}     redirections:
+#{sed.comment.tls}       entryPoint:
+#{sed.comment.tls}         to: https
+#{sed.comment.tls}         scheme: https
+  https:
+    address: :443
+
+# Enable ACME (Let's Encrypt): automatic SSL
+# @see https://docs.traefik.io/v2.2/https/acme/
+certificatesResolvers:
+  myresolver:
+    acme:
+      # Email address used for registration
+      email: '{sed.email}'
+
+      # File or key used for certificates storage.
+      storage: /etc/traefik/acme/acme.json
+
+# Writing logs to a file
+# @see https://docs.traefik.io/v2.2/observability/logs/
+log:
+  # By default, the logs are written to the standard output.
+  # You can configure a file path instead using the filePath option.
+  filePath: /var/log/traefik/traefik.log
+
+  # By default, the logs use a text format (common),
+  # but you can also ask for the json format in the format option
+  format: json
+
+  # By default, the level is set to ERROR
+  # Alternative logging levels are DEBUG, PANIC, FATAL, ERROR, WARN, and INFO
+  level: DEBUG
+
+# Enable the access logs.
+# By default, logs are written to stdout, in text format
+# @see https://docs.traefik.io/v2.2/observability/access-logs/
+accessLog:
+  # By default access logs are written to the standard output.
+  # To write the logs into a log file, use the filePath option
+  filePath: /var/log/traefik/access.log
+
+  # By default, the logs use a text format (common),
+  # but you can also ask for the json format in the format option
+  format: json
+
+# If you enable the API, a new special service
+# named api@internal is created and can then be referenced in a router
+# @see https://docs.traefik.io/v2.2/operations/api/
+api:
+  # Enable the API in insecure mode, which means that
+  # the API will be available directly on the entryPoint named traefik
+  insecure: false
+
+  # Enable the dashboard
+  dashboard: true
+
+## Metrics definition
+#[metrics]
+#
+#  # To enable Traefik to export internal metrics to Prometheus
+#  [metrics.prometheus]
+#
+#    addServicesLabels = true
+#    addEntryPointsLabels = true
+#
+#    # Name of the related entry point
+#    #
+#    # Optional
+#    # Default: "traefik"
+#    #
+#    entryPoint = "metrics"
+#
+#    # Buckets for latency metrics
+#    #
+#    # Optional
+#    # Default: [0.1, 0.3, 1.2, 5.0]
+#    #
+#    buckets = [0.1,0.3,1.2,5.0]
+#
+## Tracing definition
+#[tracing]
+#  # Service name used in Jaeger backend
+#  #
+#  # Default: "traefik"
+#  #
+#  serviceName = "traefik"
+#
+#  # Span name limit allows for name truncation in case of very long Frontend/Backend names
+#  # This can prevent certain tracing providers to drop traces that exceed their length limits
+#  #
+#  # Default: 0 - no truncation will occur
+#  #
+#  spanNameLimit = 0
+#
+#  [tracing.jaeger]
+#    # Sampling Server URL is the address of jaeger-agent's HTTP sampling server
+#    #
+#    # Default: "http://localhost:5778/sampling"
+#    #
+#    samplingServerURL = "http://localhost:5778/sampling"
+#
+#    # Sampling Type specifies the type of the sampler: const, probabilistic, rateLimiting
+#    #
+#    # Default: "const"
+#    #
+#    samplingType = "const"
+#
+#    # Sampling Param is a value passed to the sampler.
+#    # Valid values for Param field are:
+#    #   - for "const" sampler, 0 or 1 for always false/true respectively
+#    #   - for "probabilistic" sampler, a probability between 0 and 1
+#    #   - for "rateLimiting" sampler, the number of spans per second
+#    #
+#    # Default: 1.0
+#    #
+#    samplingParam = 1.0
+#
+#    # Local Agent Host Port instructs reporter to send spans to jaeger-agent at this address
+#    #
+#    # Default: "127.0.0.1:6831"
+#    #
+#    localAgentHostPort = "127.0.0.1:6831"
+#
+#    # Trace Context Header Name is the http header name used to propagate tracing context.
+#    # This must be in lower-case to avoid mismatches when decoding incoming headers.
+#    #
+#    # Default: "uber-trace-id"
+#    #
+#    traceContextHeaderName = "uber-trace-id"

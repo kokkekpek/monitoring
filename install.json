@@ -1,0 +1,12 @@
+{
+  "create": {
+    "data": 755,
+    "data/traefik": 755,
+    "data/traefik/acme": 755,
+    "log": 755
+  },
+  "templates": [
+    "docker-compose.template.yml",
+    "config/traefik/traefik.template.yml"
+  ]
+}

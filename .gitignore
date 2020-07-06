@@ -1,0 +1,14 @@
+# data
+data/
+
+# Logs
+log/
+
+# Templates
+docker-compose.yml
+config/.htpasswd
+config/traefik/acme.json
+config/traefik/traefik.yml
+
+# Installation
+sed.json
