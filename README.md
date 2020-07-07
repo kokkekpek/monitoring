@@ -4,54 +4,45 @@
 * Docker Compose
 
 ## Installation
-### 1. Copy sed.example.json to sed.json and edit
-
+### 1. Copy config.example.json to config.json
 ```json
 {
-  "domain": "traefik.domain.com",
-  "email": "my.email@google.com",
-  "comment.tls": "#"
+  "directories": {
+    "traefik.acme": {
+      "path": "./data/traefik/acme",
+      "permissions": 775
+    },
+    "traefik.log": {
+      "path": "./log",
+      "permissions": 775
+    }
+  },
+  "values": {
+    "domain": "xxx.xxx",
+    "email": "xxx@xxx.xxx"
+  },
+  "show": {
+    "tls": false
+  }
 }
 ```
+### 2. Edit config.json
 **domain** - domain name for traefik dashboard. Set traefik.localhost for example  
 **email** - email for SSL certificates. Do not required on localhost  
-**comment.tls** - "#" or "". Place "#" if you want comment part of Traefik config, disable TLS and stop redirection on https. Use "#" localhost for example. Place empty string "" if you want use TLS and enable redirection on https.  
+**tls** - True if you want comment enable TLS and redirection on https. Use false on localhost.  
 
-#### Note
-sed.json used in installation process. Placeholders in template files replace on values from sed.json.  
-  
-traefik.template.yml
-```yaml
-acme:
-  email: '{sed.email}'
+### 3. Copy config/.htpasswd.example to config/.htpasswd
+```
+123:$apr1$6IjtTIJg$U5MsY5q4ZZlAbAOjDgUvn/
 ```
 
-sed.json
-```json
-{
-    "email": "my.email@google.com"
-}
-```
-
-Result in traefik.yml
-```yaml
-acme:
-  email: "my.email@google.com",
-```
-
-### 2. Copy config/.htpasswd.example to config/.htpasswd and edit
-Example:
-```
-test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/
-test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0
-```
-
-Install apache2-utils htpasswd command
+### 4. Edit config/.htpasswd
+Install apache2-utils for "htpasswd" command
 ```sh
 sudo apt install apache2-utils -y
 ```
 
-Use htpasswd command for password hashing
+Use "htpasswd" command for password hashing
 ```sh
 htpasswd -nb user password
 ```
@@ -59,13 +50,18 @@ htpasswd -nb user password
 user:$apr1$fm1I.8qI$d8Eek89T5o7PF9Gt8NuqF1
 ```
 
-### 3. Run installation script
-```sh
-cd project/directory/
-docker run -it --rm --name script -v "$PWD":/usr/src/app -w /usr/src/app node:14.5-alpine node install
+Paste password into a file.
+```
+123:$apr1$6IjtTIJg$U5MsY5q4ZZlAbAOjDgUvn/
+user:$apr1$fm1I.8qI$d8Eek89T5o7PF9Gt8NuqF1
 ```
 
-### 4. Create external network
+### 5. Run installation script
+```sh
+sh ./configurator.sh
+```
+
+### 4. Create docker network
 ```sh
 docker network create web
 ```

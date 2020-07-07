@@ -5,22 +5,22 @@ services:
     container_name: traefik
     ports:
       - 80:80
-#{sed.comment.tls}      - 443:443
+#{cfg.tls}      - 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./config/.htpasswd:/etc/.htpasswd
-      - ./data/traefik/acme:/etc/traefik/acme
-      - ./log:/var/log/
+      - {cfg.traefik.acme}:/etc/traefik/acme
+      - {cfg.traefik.log}:/var/log/
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.auth.basicauth.usersFile=/etc/.htpasswd
-      - traefik.http.routers.api.rule=Host(`{sed.domain}`)
+      - traefik.http.routers.api.rule=Host(`{cfg.domain}`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=auth
       - traefik.http.routers.api.entrypoints=http
-#{sed.comment.tls}      - traefik.http.routers.api.tls=true
-#{sed.comment.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
+#{cfg.tls}      - traefik.http.routers.api.tls=true
+#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
     networks:
       - web
       - traefik

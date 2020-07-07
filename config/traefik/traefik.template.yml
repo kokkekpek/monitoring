@@ -16,13 +16,13 @@ providers:
 entryPoints:
   http:
     address: :80
-#{sed.comment.tls}   http:
-#{sed.comment.tls}     redirections:
-#{sed.comment.tls}       entryPoint:
-#{sed.comment.tls}         to: https
-#{sed.comment.tls}         scheme: https
-#{sed.comment.tls}  https:
-#{sed.comment.tls}    address: :443
+#{cfg.tls}    http:
+#{cfg.tls}      redirections:
+#{cfg.tls}        entryPoint:
+#{cfg.tls}          to: https
+#{cfg.tls}          scheme: https
+#{cfg.tls}   https:
+#{cfg.tls}     address: :443
 
 # Enable ACME (Let's Encrypt): automatic SSL
 # @see https://docs.traefik.io/v2.2/https/acme/
@@ -30,7 +30,7 @@ certificatesResolvers:
   myresolver:
     acme:
       # Email address used for registration
-      email: '{sed.email}'
+      email: '{cfg.email}'
 
       # File or key used for certificates storage.
       storage: /etc/traefik/acme/acme.json
