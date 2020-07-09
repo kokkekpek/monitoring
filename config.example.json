@@ -10,7 +10,8 @@
     }
   },
   "values": {
-    "domain": "xxx.xxx",
+    "whoami.domain": "xxx.xxx",
+    "traefik.domain": "xxx.xxx",
     "email": "xxx@xxx.xxx"
   },
   "show": {

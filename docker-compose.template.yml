@@ -15,7 +15,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.auth.basicauth.usersFile=/etc/.htpasswd
-      - traefik.http.routers.api.rule=Host(`{cfg.domain}`)
+      - traefik.http.routers.api.rule=Host(`{cfg.traefik.domain}`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=auth
       - traefik.http.routers.api.entrypoints=web
@@ -23,6 +23,15 @@ services:
 #{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
     networks:
       - web
+      - traefik
+  whoami:
+    image: containous/whoami
+    container_name: whoami
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`{cfg.whoami.domain}`)
+      - traefik.http.routers.whoami.entrypoints=web
+    networks:
       - traefik
 networks:
   web:
