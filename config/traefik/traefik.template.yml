@@ -27,7 +27,7 @@ entryPoints:
 # Enable ACME (Let's Encrypt): automatic SSL
 # @see https://docs.traefik.io/v2.2/https/acme/
 certificatesResolvers:
-  myresolver:
+  letsEncrypt:
     acme:
       # Email address used for registration
       email: '{cfg.email}'

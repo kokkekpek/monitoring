@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.api.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.usersFile=/etc/.htpasswd
 #{cfg.tls}      - traefik.http.routers.api.tls=true
-#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
+#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=letsEncrypt
     networks:
       - web
       - traefik
@@ -32,8 +32,8 @@ services:
       - traefik.http.routers.whoami.rule=Host(`{cfg.whoami.domain}`)
       - traefik.http.routers.whoami.entrypoints=web
       - traefik.http.routers.whoami.middlewares=auth
-#{cfg.tls}      - traefik.http.routers.api.tls=true
-#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
+#{cfg.tls}      - traefik.http.routers.whoami.tls=true
+#{cfg.tls}      - traefik.http.routers.whoami.tls.certresolver=letsEncrypt
     networks:
       - traefik
 networks:
