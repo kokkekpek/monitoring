@@ -5,7 +5,7 @@
       "permissions": 775
     },
     "traefik.log": {
-      "path": "./log",
+      "path": "./log/traefik",
       "permissions": 775
     }
   },
