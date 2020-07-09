@@ -18,7 +18,7 @@ services:
       - traefik.http.routers.api.rule=Host(`{cfg.domain}`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=auth
-      - traefik.http.routers.api.entrypoints=http
+      - traefik.http.routers.api.entrypoints=web
 #{cfg.tls}      - traefik.http.routers.api.tls=true
 #{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
     networks:

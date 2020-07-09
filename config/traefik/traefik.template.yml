@@ -14,14 +14,14 @@ providers:
 # HTTPS redirection (80 to 443)
 # @see https://docs.traefik.io/v2.2/routing/entrypoints/
 entryPoints:
-  http:
+  web:
     address: :80
 #{cfg.tls}    http:
 #{cfg.tls}      redirections:
 #{cfg.tls}        entryPoint:
 #{cfg.tls}          to: https
 #{cfg.tls}          scheme: https
-#{cfg.tls}   https:
+#{cfg.tls}   webSecure:
 #{cfg.tls}     address: :443
 
 # Enable ACME (Let's Encrypt): automatic SSL
