@@ -32,7 +32,8 @@ services:
       - traefik.http.routers.whoami.rule=Host(`{cfg.whoami.domain}`)
       - traefik.http.routers.whoami.entrypoints=web
       - traefik.http.routers.api.middlewares=auth
-      - traefik.http.middlewares.auth.basicauth.usersFile=/etc/.htpasswd
+#{cfg.tls}      - traefik.http.routers.api.tls=true
+#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=myresolver
     networks:
       - traefik
 networks:
