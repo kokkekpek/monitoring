@@ -11,7 +11,7 @@ services:
       - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./config/.htpasswd:/etc/.htpasswd
       - {cfg.traefik.acme}:/etc/traefik/acme
-      - {cfg.traefik.log}:/var/log/
+      - {cfg.traefik.log}:/var/log/traefik
     labels:
       - traefik.enable=true
       - traefik.http.routers.api.rule=Host(`{cfg.traefik.domain}`)
