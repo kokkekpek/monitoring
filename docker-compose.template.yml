@@ -2,7 +2,6 @@ version: "3.7"
 services:
   traefik:
     image: traefik:v2.2
-    container_name: traefik
     ports:
       - 80:80
 #{cfg.tls}      - 443:443
@@ -26,7 +25,6 @@ services:
       - traefik
   whoami:
     image: containous/whoami:v1.5.0
-    container_name: whoami
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`{cfg.whoami.domain}`)
