@@ -9,7 +9,12 @@ global:
 # Enabling the docker provider
 # @see https://docs.traefik.io/v2.2/providers/docker/
 providers:
-  docker: {}
+  docker:
+    # Expose containers by default through Traefik.
+    # If set to false, containers that don't have a traefik.enable=true label
+    # will be ignored from the resulting routing configuration.
+    # @see https://docs.traefik.io/providers/docker/#exposedbydefault
+    exposedByDefault: false
 
 # HTTPS redirection (80 to 443)
 # @see https://docs.traefik.io/v2.2/routing/entrypoints/
