@@ -16,6 +16,11 @@ providers:
     # @see https://docs.traefik.io/providers/docker/#exposedbydefault
     exposedByDefault: false
 
+    # Defines a default docker network to use for connections to all containers.
+    # This option can be overridden on a container basis with the traefik.docker.network label.
+    # @see https://docs.traefik.io/providers/docker/#network
+    network: traefik
+
 # HTTPS redirection (80 to 443)
 # @see https://docs.traefik.io/v2.2/routing/entrypoints/
 entryPoints:
