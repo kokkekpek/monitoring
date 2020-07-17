@@ -12,9 +12,7 @@
   "values": {
     "whoami.domain": "xxx.xxx",
     "traefik.domain": "xxx.xxx",
-    "email": "xxx@xxx.xxx"
-  },
-  "show": {
+    "email": "xxx@xxx.xxx",
     "tls": false
   }
 }
