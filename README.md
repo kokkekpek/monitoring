@@ -10,11 +10,11 @@
   "directories": {
     "traefik.acme": {
       "path": "./data/traefik/acme",
-      "permissions": 775
+      "permissions": 755
     },
     "traefik.log": {
       "path": "./log/traefik",
-      "permissions": 775
+      "permissions": 755
     }
   },
   "values": {
