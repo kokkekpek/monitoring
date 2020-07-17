@@ -9,11 +9,11 @@
 {
   "directories": {
     "traefik.acme": {
-      "path": "./data/traefik/acme",
+      "path": "./xxx/data/traefik/acme",
       "permissions": 755
     },
     "traefik.log": {
-      "path": "./log/traefik",
+      "path": "./xxx/log/traefik",
       "permissions": 755
     }
   },
