@@ -28,9 +28,9 @@ entryPoints:
     address: :80
     #{cfg.tls}http:
       #{cfg.tls}redirections:
-      #{cfg.tls}entryPoint:
-        #{cfg.tls}to: webSecure
-        #{cfg.tls}scheme: https
+        #{cfg.tls}entryPoint:
+          #{cfg.tls}to: webSecure
+          #{cfg.tls}scheme: https
     #{cfg.tls}webSecure:
     #{cfg.tls}address: :443
 
