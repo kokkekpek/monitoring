@@ -31,8 +31,8 @@ entryPoints:
         #{cfg.tls}entryPoint:
           #{cfg.tls}to: webSecure
           #{cfg.tls}scheme: https
-    #{cfg.tls}webSecure:
-    #{cfg.tls}address: :443
+  #{cfg.tls}webSecure:
+  #{cfg.tls}address: :443
 
 # Enable ACME (Let's Encrypt): automatic SSL
 # @see https://docs.traefik.io/v2.2/https/acme/
