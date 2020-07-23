@@ -5,7 +5,7 @@ services:
     container_name: traefik
     ports:
       - 80:80
-#{cfg.tls}      - 443:443
+      #{cfg.tls}- 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml
@@ -19,8 +19,8 @@ services:
       - traefik.http.routers.api.entrypoints=web
       - traefik.http.routers.api.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.usersFile=/etc/.htpasswd
-#{cfg.tls}      - traefik.http.routers.api.tls=true
-#{cfg.tls}      - traefik.http.routers.api.tls.certresolver=letsEncrypt
+      #{cfg.tls}- traefik.http.routers.api.tls=true
+      #{cfg.tls}- traefik.http.routers.api.tls.certresolver=letsEncrypt
     networks:
       - web
       - traefik
@@ -32,8 +32,8 @@ services:
       - traefik.http.routers.whoami.rule=Host(`{cfg.whoami.domain}`)
       - traefik.http.routers.whoami.entrypoints=web
       - traefik.http.routers.whoami.middlewares=auth
-#{cfg.tls}      - traefik.http.routers.whoami.tls=true
-#{cfg.tls}      - traefik.http.routers.whoami.tls.certresolver=letsEncrypt
+      #{cfg.tls}- traefik.http.routers.whoami.tls=true
+      #{cfg.tls}- traefik.http.routers.whoami.tls.certresolver=letsEncrypt
     networks:
       - traefik
 networks:
