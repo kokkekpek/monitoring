@@ -81,3 +81,17 @@ api:
 
   # Enable the dashboard
   dashboard: true
+
+# Redirecting the Client to a Different Scheme
+# @see https://docs.traefik.io/middlewares/redirectscheme/
+http:
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        # The scheme option defines the scheme of the new url.
+        # @see https://docs.traefik.io/middlewares/redirectscheme/#scheme
+        scheme: https
+
+        # Set the permanent option to true to apply a permanent redirection.
+        # @see https://docs.traefik.io/middlewares/redirectscheme/#permanent
+        permanent: true
