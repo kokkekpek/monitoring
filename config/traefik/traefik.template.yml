@@ -13,7 +13,7 @@ providers:
     # Expose containers by default through Traefik.
     # If set to false, containers that don't have a traefik.enable=true label
     # will be ignored from the resulting routing configuration.
-    # @see https://docs.traefik.io/providers/docker/#exposedbydefault
+    # @see https://docs.traefik.io/v2.2/providers/docker/#exposedbydefault
     exposedByDefault: false
 
     # Defines a default docker network to use for connections to all containers.
@@ -21,13 +21,25 @@ providers:
     # @see https://docs.traefik.io/providers/docker/#network
     network: traefik
 
+  # Good Old Configuration File
+  # @see https://docs.traefik.io/v2.2/providers/file/
+  file:
+    # Defines the path to the configuration file.
+    # @see https://docs.traefik.io/v2.2/providers/file/#filename
+    filename: /etc/traefik/provider.yml
+
 # HTTPS redirection (80 to 443)
 # @see https://docs.traefik.io/v2.2/routing/entrypoints/
 entryPoints:
   web:
     address: :80
-  #{cfg.tls}webSecure:
-    #{cfg.tls}address: :443
+    #{cfg.tls}http:
+      #{cfg.tls}redirections:
+        #{cfg.tls}entryPoint:
+          #{cfg.tls}to: webSecure
+          #{cfg.tls}scheme: https
+  webSecure:
+    address: :443
 
 # Enable ACME (Let's Encrypt): automatic SSL
 # @see https://docs.traefik.io/v2.2/https/acme/
@@ -81,26 +93,3 @@ api:
 
   # Enable the dashboard
   dashboard: true
-
-# Middlewares
-# @see https://docs.traefik.io/middlewares/overview/
-http:
-  middlewares:
-    redirect-to-https:
-      # Redirecting the Client to a Different Scheme
-      # @see https://docs.traefik.io/middlewares/redirectscheme/
-      redirectScheme:
-        # The scheme option defines the scheme of the new url.
-        # @see https://docs.traefik.io/middlewares/redirectscheme/#scheme
-        scheme: https
-
-        # Set the permanent option to true to apply a permanent redirection.
-        # @see https://docs.traefik.io/middlewares/redirectscheme/#permanent
-        permanent: true
-    # The BasicAuth middleware is a quick way to restrict access to your services to known users.
-    # @see https://docs.traefik.io/middlewares/basicauth/
-    auth:
-      basicauth:
-        # The usersFile option is the path to an external file that contains the authorized users for the middleware.
-        # @see https://docs.traefik.io/middlewares/basicauth/
-        usersFile: /etc/.htpasswd
