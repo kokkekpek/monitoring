@@ -1,5 +1,5 @@
 ## Requirements
-* Ubuntu 18.04 or later
+* Ubuntu 20.04
 * Docker
 * Docker Compose
 
