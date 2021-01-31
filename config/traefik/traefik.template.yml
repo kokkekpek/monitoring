@@ -1,35 +1,35 @@
-# Config for v2.2
+# Config for v2.4
 # Official documentation
-# @see https://docs.traefik.io/v2.2/
+# @see https://doc.traefik.io/traefik/v2.4/
 
 global:
   checkNewVersion: false
   sendAnonymousUsage: false
 
 # Enabling the docker provider
-# @see https://docs.traefik.io/v2.2/providers/docker/
+# @see https://doc.traefik.io/traefik/v2.4/providers/docker/
 providers:
   docker:
     # Expose containers by default through Traefik.
     # If set to false, containers that don't have a traefik.enable=true label
     # will be ignored from the resulting routing configuration.
-    # @see https://docs.traefik.io/v2.2/providers/docker/#exposedbydefault
+    # @see https://doc.traefik.io/traefik/v2.4/providers/docker/#exposedbydefault
     exposedByDefault: false
 
     # Defines a default docker network to use for connections to all containers.
     # This option can be overridden on a container basis with the traefik.docker.network label.
-    # @see https://docs.traefik.io/providers/docker/#network
+    # @see https://doc.traefik.io/traefik/v2.4/providers/docker/#network
     network: traefik
 
   # Good Old Configuration File
-  # @see https://docs.traefik.io/v2.2/providers/file/
+  # @see https://doc.traefik.io/traefik/v2.4/providers/file/
   file:
     # Defines the path to the configuration file.
-    # @see https://docs.traefik.io/v2.2/providers/file/#filename
+    # @see https://doc.traefik.io/traefik/v2.4/providers/file/#filename
     filename: /etc/traefik/provider.yml
 
 # HTTPS redirection (80 to 443)
-# @see https://docs.traefik.io/v2.2/routing/entrypoints/
+# @see https://doc.traefik.io/traefik/v2.4/routing/entrypoints/
 entryPoints:
   web:
     address: :80
@@ -42,7 +42,7 @@ entryPoints:
     address: :443
 
 # Enable ACME (Let's Encrypt): automatic SSL
-# @see https://docs.traefik.io/v2.2/https/acme/
+# @see https://doc.traefik.io/traefik/v2.4/https/acme/
 certificatesResolvers:
   letsEncrypt:
     acme:
@@ -57,7 +57,7 @@ certificatesResolvers:
         entryPoint: web
 
 # Writing logs to a file
-# @see https://docs.traefik.io/v2.2/observability/logs/
+# @see https://doc.traefik.io/traefik/v2.4/observability/logs/
 log:
   # By default, the logs are written to the standard output.
   # You can configure a file path instead using the filePath option.
@@ -73,7 +73,7 @@ log:
 
 # Enable the access logs.
 # By default, logs are written to stdout, in text format
-# @see https://docs.traefik.io/v2.2/observability/access-logs/
+# @see https://doc.traefik.io/traefik/v2.4/observability/access-logs/
 accessLog:
   # By default access logs are written to the standard output.
   # To write the logs into a log file, use the filePath option
@@ -85,7 +85,7 @@ accessLog:
 
 # If you enable the API, a new special service
 # named api@internal is created and can then be referenced in a router
-# @see https://docs.traefik.io/v2.2/operations/api/
+# @see https://doc.traefik.io/traefik/v2.4/operations/api/
 api:
   # Enable the API in insecure mode, which means that
   # the API will be available directly on the entryPoint named traefik
