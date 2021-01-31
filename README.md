@@ -51,6 +51,8 @@ Paste password into a file.
 user:$apr1$fm1I.8qI$d8Eek89T5o7PF9Gt8NuqF1
 ```
 
+Remove default 123:123 user and password if you use it in public.
+
 ### 4. Run installation script
 ```sh
 sh ./configurator.sh
